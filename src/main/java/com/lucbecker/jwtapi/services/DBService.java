@@ -8,12 +8,16 @@ import com.lucbecker.jwtapi.repositories.CategoriaRepository;
 import com.lucbecker.jwtapi.repositories.ClienteRepository;
 import com.lucbecker.jwtapi.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
 @Service
 public class DBService {
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -26,7 +30,7 @@ public class DBService {
 
         // -------- Cliente 1 ---------
 
-        Cliente cli1 = new Cliente(null, "Lucas Becker", "lucas@email.com", "123");
+        Cliente cli1 = new Cliente(null, "Lucas Becker", "lucas@email.com", pe.encode("123"));
         cli1.addPerfis(Perfil.ADMIN);
 
         Categoria cat1 = new Categoria(null, "Informática", cli1);
@@ -53,7 +57,7 @@ public class DBService {
 
         // -------- Cliente 2 ---------
 
-        Cliente cli2 = new Cliente(null, "João Ninguem", "joao@email.com", "123");
+        Cliente cli2 = new Cliente(null, "João Ninguem", "joao@email.com", pe.encode("123"));
 
         Categoria cat3 = new Categoria(null, "Cama mesa e banho", cli2);
 

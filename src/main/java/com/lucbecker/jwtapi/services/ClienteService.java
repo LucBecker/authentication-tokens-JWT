@@ -4,6 +4,7 @@ import com.lucbecker.jwtapi.domain.Cliente;
 import com.lucbecker.jwtapi.dtos.ClienteDTO;
 import com.lucbecker.jwtapi.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -12,6 +13,15 @@ import java.util.Optional;
 
 @Service
 public class ClienteService {
+
+    /**
+     *
+     * Injetando o @Bean BCryptPassowordEncoder para encodar a senha do usuárioDTO
+     * antes de salvá-la na base de dados
+     *
+     */
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Autowired
     private ClienteRepository repository;
@@ -26,7 +36,7 @@ public class ClienteService {
     }
 
     public Cliente create(ClienteDTO objDTO) {
-        Cliente newObj = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getSenha());
+        Cliente newObj = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), pe.encode(objDTO.getSenha()));
         return repository.save(newObj);
     }
 
