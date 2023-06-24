@@ -1,6 +1,7 @@
 package com.lucbecker.jwtapi.services;
 
 import com.lucbecker.jwtapi.domain.Cliente;
+import com.lucbecker.jwtapi.dtos.ClienteDTO;
 import com.lucbecker.jwtapi.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class ClienteService {
 
     public List<Cliente> findAll() {
         return repository.findAll();
+    }
+
+    public Cliente create(ClienteDTO objDTO) {
+        Cliente newObj = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getSenha());
+        return repository.save(newObj);
     }
 }
