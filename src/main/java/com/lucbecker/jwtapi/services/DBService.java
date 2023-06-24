@@ -3,6 +3,7 @@ package com.lucbecker.jwtapi.services;
 import com.lucbecker.jwtapi.domain.Categoria;
 import com.lucbecker.jwtapi.domain.Cliente;
 import com.lucbecker.jwtapi.domain.Produto;
+import com.lucbecker.jwtapi.enums.Perfil;
 import com.lucbecker.jwtapi.repositories.CategoriaRepository;
 import com.lucbecker.jwtapi.repositories.ClienteRepository;
 import com.lucbecker.jwtapi.repositories.ProdutoRepository;
@@ -26,6 +27,7 @@ public class DBService {
         // -------- Cliente 1 ---------
 
         Cliente cli1 = new Cliente(null, "Lucas Becker", "lucas@email.com", "123");
+        cli1.addPerfis(Perfil.ADMIN);
 
         Categoria cat1 = new Categoria(null, "Informática", cli1);
         Categoria cat2 = new Categoria(null, "Escritório", cli1);
@@ -51,7 +53,7 @@ public class DBService {
 
         // -------- Cliente 2 ---------
 
-        Cliente cli2 = new Cliente(null, "Albert Einstein", "einstein@email.com", "123");
+        Cliente cli2 = new Cliente(null, "João Ninguem", "joao@email.com", "123");
 
         Categoria cat3 = new Categoria(null, "Cama mesa e banho", cli2);
 
