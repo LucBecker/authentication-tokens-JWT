@@ -1,5 +1,6 @@
 package com.lucbecker.jwtapi.dtos;
 
+import com.lucbecker.jwtapi.domain.Produto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -22,13 +23,10 @@ public class ProdutoDTO implements Serializable {
         super();
     }
 
-    public ProdutoDTO(Integer id,
-                      @NotEmpty(message = "Campo NOME é mandatório") @Length(min = 3, max = 100, message = "O campo NOME deve ter entre 3 e 100 caracteres") String nome,
-                      @NotEmpty(message = "Campo PREÇO é mandatório") Double preco) {
-        super();
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
+    public ProdutoDTO(Produto obj) {
+        this.id = obj.getId();
+        this.nome = obj.getNome();
+        this.preco = obj.getPreco();
     }
 
     public Integer getId() {
