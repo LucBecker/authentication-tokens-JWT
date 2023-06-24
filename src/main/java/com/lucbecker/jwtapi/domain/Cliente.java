@@ -1,5 +1,6 @@
 package com.lucbecker.jwtapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucbecker.jwtapi.enums.Perfil;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente implements Serializable {
@@ -19,11 +21,21 @@ public class Cliente implements Serializable {
     private Integer id;
     private String nome;
     private String email;
+
+    /**
+     *
+     * Adicionando a anotação @Jsonignore para que a senha não seja mostrada na
+     * recuperação de um cliente via endpoint
+     *
+     */
+    @JsonIgnore
     private String senha;
 
 
     /**
-     * O usuario pode ter perfil de admin e cliente
+     * O usuario pode ter perfil de admin e cliente A anotação (FetchType.EAGER) é
+     * usada para garantir que toda vez que um cliente for buscado na base de dados
+     * seus perfis também sejam buscados
      *
      */
     @ElementCollection(fetch = FetchType.EAGER)
@@ -80,8 +92,8 @@ public class Cliente implements Serializable {
         this.senha = senha;
     }
 
-    public Set<Integer> getPerfis() {
-        return perfis;
+    public Set<Perfil> getPerfis() {
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
     public void setPerfis(Set<Integer> perfis) {
