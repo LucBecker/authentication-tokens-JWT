@@ -6,6 +6,7 @@ import com.lucbecker.jwtapi.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,17 @@ public class ClienteService {
     public Cliente create(ClienteDTO objDTO) {
         Cliente newObj = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getSenha());
         return repository.save(newObj);
+    }
+
+    public Cliente update(Integer id, @Valid ClienteDTO objDTO) {
+        Cliente obj = this.findById(id);
+        this.fromDTO(obj, objDTO);
+        return repository.save(obj);
+    }
+
+    private void fromDTO(Cliente obj, @Valid ClienteDTO objDTO) {
+        obj.setNome(objDTO.getNome());
+        obj.setEmail(objDTO.getEmail());
+        obj.setSenha(objDTO.getSenha());
     }
 }
