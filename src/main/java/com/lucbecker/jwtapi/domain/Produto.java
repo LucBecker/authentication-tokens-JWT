@@ -22,16 +22,15 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    private List<Produto> produtos = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
 
     public Produto() {
     }
 
-    public Produto(Integer id, String nome, Double preco, List<Produto> produtos) {
+    public Produto(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.produtos = produtos;
     }
 
     public Integer getId() {
@@ -58,12 +57,12 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     @Override
