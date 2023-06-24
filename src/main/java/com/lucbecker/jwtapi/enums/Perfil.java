@@ -1,6 +1,6 @@
 package com.lucbecker.jwtapi.enums;
 
-public class Perfil {
+public enum Perfil {
 
     ADMIN(1, "ROLE_ADMIN"), CLIENTE(2, "ROLE_CLIENTE");
 
@@ -21,17 +21,14 @@ public class Perfil {
     }
 
     public static Perfil toEnum(Integer cod) {
-
         if (cod == null) {
             return null;
         }
-
-        for (Perfil x : Perfil.values) {
+        for (Perfil x : Perfil.values()) {
             if (cod.equals(x.getCodigo())) {
                 return x;
             }
         }
-
         throw new IllegalArgumentException("Id inválido: " + cod);
     }
 }
