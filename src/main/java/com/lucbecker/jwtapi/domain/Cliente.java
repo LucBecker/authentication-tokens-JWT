@@ -38,12 +38,11 @@ public class Cliente implements Serializable {
         addPerfis(Perfil.CLIENTE);
     }
 
-    public Cliente(Integer id, String nome, String email, String senha, Set<Integer> perfis) {
+    public Cliente(Integer id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.perfis = perfis;
 
         // Todo usuario já é instanciado com perfil de cliente
         addPerfis(Perfil.CLIENTE);
