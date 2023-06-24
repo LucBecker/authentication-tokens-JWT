@@ -4,7 +4,9 @@ import com.lucbecker.jwtapi.enums.Perfil;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +29,9 @@ public class Cliente implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
     private Set<Integer> perfis = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Categoria> categorias = new ArrayList<>();
 
     public Cliente() {
         // Todo usuario já é instanciado com perfil de cliente
@@ -91,6 +96,14 @@ public class Cliente implements Serializable {
 
     public void addPerfis(Perfil perfil) {
         perfis.add(perfil.getCodigo());
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     @Override

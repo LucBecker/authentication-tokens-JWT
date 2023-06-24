@@ -18,13 +18,17 @@ public class Categoria implements Serializable {
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
     public Categoria() {
     }
 
-    public Categoria(Integer id, String nome, List<Produto> produtos) {
+    public Categoria(Integer id, String nome, Cliente cliente) {
         this.id = id;
         this.nome = nome;
-        this.produtos = produtos;
+        this.cliente = cliente;
     }
 
     public Integer getId() {
@@ -49,6 +53,14 @@ public class Categoria implements Serializable {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
