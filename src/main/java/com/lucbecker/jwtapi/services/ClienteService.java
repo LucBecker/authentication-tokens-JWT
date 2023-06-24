@@ -36,6 +36,11 @@ public class ClienteService {
         return repository.save(obj);
     }
 
+    public void delete(Integer id) {
+        this.findById(id);
+        repository.deleteById(id);
+    }
+
     private void fromDTO(Cliente obj, @Valid ClienteDTO objDTO) {
         obj.setNome(objDTO.getNome());
         obj.setEmail(objDTO.getEmail());
