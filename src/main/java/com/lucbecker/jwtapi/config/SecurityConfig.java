@@ -1,6 +1,7 @@
 package com.lucbecker.jwtapi.config;
 
 import com.lucbecker.jwtapi.security.JWTAuthenticationFilter;
+import com.lucbecker.jwtapi.security.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -88,6 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().anyRequest().authenticated();
 
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, this.userDetailsService));
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 
         /*** Assegurando que a aplicação não vai criar sessão de usuário ***/
