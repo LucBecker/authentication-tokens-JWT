@@ -3,7 +3,6 @@ package com.lucbecker.jwtapi.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucbecker.jwtapi.config.JWTUtil;
 import com.lucbecker.jwtapi.dtos.CredenciaisDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,10 +25,8 @@ import java.util.ArrayList;
  */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
     private JWTUtil jwtUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
